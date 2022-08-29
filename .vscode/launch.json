@@ -13,7 +13,7 @@
 
             "console": "integratedTerminal",
             // "args":["--dataset", "cora", "--gpu", "0","--self-loop"], //train_gcn
-            "args":["39", "1", "1", "0"], //513还是一层None的链接层。
+            // "args":["39", "1", "1", "0"], //513还是一层None的链接层。
         }
     ]
 }
