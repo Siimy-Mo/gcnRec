@@ -4,6 +4,27 @@ import pandas as pd
 
 # 一些简单的应用函数
 
+def get_Features(USER_NUM,ITEM_NUM):
+    UserFeatures=np.identity(USER_NUM)
+    ItemFeatures=[]
+
+    if(True):
+      UsrDat=get_UserData() # 只是bidder rate 1
+      UserFeatures=np.concatenate((UserFeatures,UsrDat), axis=1) 
+      UserFeatures =UserFeatures.astype(np.float32)
+
+    if(True):
+      ItemFeatures=get_ItemData()
+      ItemFeatures= np.concatenate((np.identity(ITEM_NUM,dtype=np.bool_), ItemFeatures), axis=1) 
+    return UserFeatures,ItemFeatures
+
+def get_UserData():
+    df = pd.read_csv('./data/ebay/DealerFeatures.csv', sep=';', engine='python')
+    df=df.sort_values(by=['bidder'])
+    del df['bidder']
+    values =df.values.astype(np.float32)
+    return values
+
 def get_ItemData():
     df = pd.read_csv('./data/ebay/ItemFeatures.csv', sep=';', engine='python')
     df=df.sort_values(by=['auctionid'])

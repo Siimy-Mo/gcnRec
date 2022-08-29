@@ -1,7 +1,7 @@
 import argparse
 import pickle
 import time
-from utils import generate_gcnData, get_ItemData
+from utils import generate_gcnData, get_Features
 from model import *
 
 DIM=60
@@ -24,7 +24,10 @@ opt = parser.parse_args()
 print(opt)
 
 def main():
-    train_data = pickle.load(open('../datasets/' + opt.dataset + '/train.txt', 'rb'))
+    UserFeatures,ItemFeatures=get_Features(USER_NUM,ITEM_NUM)
+
+    print(UserFeatures.shape) # id的熱編碼or id+features _____892 893
+    print(ItemFeatures.shape) # 【openbid-type-duration】 _____575 588
 
     # 初始化model
     # model = trans_to_cuda(SessionGraph(opt, n_node))
@@ -53,7 +56,6 @@ def main():
 if __name__ == '__main__':
     # 读取数据
     dictItems,MAXPRICE,MAXBIDS,train_Test_pidList = generate_gcnData(USER_NUM)
-    print(dictItems)
-
+    
     #投入main中
     main()
