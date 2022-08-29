@@ -8,9 +8,10 @@ DIM=60
 USER_NUM = 892
 ITEM_NUM = 575
 parser = argparse.ArgumentParser()
+parser.add_argument('--epoch', type=int, default=30, help='the number of epochs to train for')
 parser.add_argument('--batchSize', type=int, default=100, help='input batch size')
 parser.add_argument('--hiddenSize', type=int, default=100, help='hidden state size')
-parser.add_argument('--epoch', type=int, default=30, help='the number of epochs to train for')
+
 parser.add_argument('--lr', type=float, default=0.001, help='learning rate')  # [0.001, 0.0005, 0.0001]
 parser.add_argument('--lr_dc', type=float, default=0.1, help='learning rate decay rate')
 parser.add_argument('--lr_dc_step', type=int, default=3, help='the number of steps after which the learning rate decay')
@@ -31,7 +32,10 @@ def main():
 
     # 初始化model
     # model = trans_to_cuda(SessionGraph(opt, n_node))
-
+    in_size = UserFeatures.shape[1]
+    out_size = 100
+    model = GCN(in_size,16,out_size)
+    
     # 初始化各项计数变量
     start = time.time()
     best_result = [0, 0]
@@ -56,6 +60,6 @@ def main():
 if __name__ == '__main__':
     # 读取数据
     dictItems,MAXPRICE,MAXBIDS,train_Test_pidList = generate_gcnData(USER_NUM)
-    
+
     #投入main中
-    main()
+    main(train_Test_pidList)

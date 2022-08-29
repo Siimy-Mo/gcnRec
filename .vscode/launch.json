@@ -8,7 +8,8 @@
             "name": "Python: モジュール",
             "type": "python",
             "request": "launch",
-            "program": "./gcn.py",
+            // "program": "./gcn.py",
+            "program": "./preprocess.py",
             // "program": "./Auction_GCN.py",
 
             "console": "integratedTerminal",
